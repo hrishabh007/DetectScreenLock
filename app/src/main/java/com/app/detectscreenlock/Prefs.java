@@ -436,37 +436,19 @@ public final class Prefs {
         private int mMode = -1;
         private boolean mUseDefault = false;
 
-        /**
-         * Set the filename of the SharedPreference instance. Usually this is the application's
-         * packagename.xml but it can be modified for migration purposes or customization.
-         *
-         * @param prefsName the filename used for the SharedPreference
-         * @return the {@link com.pixplicity.easyprefs.library.Prefs.Builder} object.
-         */
+
         public Builder setPrefsName(final String prefsName) {
             mKey = prefsName;
             return this;
         }
 
-        /**
-         * Set the Context used to instantiate the SharedPreferences
-         *
-         * @param context the application context
-         * @return the {@link com.pixplicity.easyprefs.library.Prefs.Builder} object.
-         */
+
         public Builder setContext(final Context context) {
             mContext = context;
             return this;
         }
 
-        /**
-         * Set the mode of the SharedPreference instance.
-         *
-         * @param mode Operating mode.  Use 0 or {@link Context#MODE_PRIVATE} for the
-         *             default operation, {@link Context#MODE_WORLD_READABLE}
-         * @return the {@link com.pixplicity.easyprefs.library.Prefs.Builder} object.
-         * @see Context#getSharedPreferences
-         */
+
         public Builder setMode(final int mode) {
             if (mode == ContextWrapper.MODE_PRIVATE || mode == ContextWrapper.MODE_WORLD_READABLE || mode == ContextWrapper.MODE_WORLD_WRITEABLE || mode == ContextWrapper.MODE_MULTI_PROCESS) {
                 mMode = mode;
@@ -477,15 +459,7 @@ public final class Prefs {
             return this;
         }
 
-        /**
-         * Set the default SharedPreference file name. Often the package name of the application is
-         * used, but if the {@link android.preference.PreferenceActivity} or {@link
-         * android.preference.PreferenceFragment} is used the system will append that with
-         * _preference.
-         *
-         * @param defaultSharedPreference true if default SharedPreference name should used.
-         * @return the {@link com.pixplicity.easyprefs.library.Prefs.Builder} object.
-         */
+
         public Builder setUseDefaultSharedPreference(boolean defaultSharedPreference) {
             mUseDefault = defaultSharedPreference;
             return this;
