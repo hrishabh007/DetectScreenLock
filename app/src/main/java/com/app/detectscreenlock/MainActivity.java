@@ -16,26 +16,38 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity {
-    IntentFilter filter;
+    private IntentFilter filter;
+    private ScreenOnOffReceiver onoffReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Window win = getWindow();
-        win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-        win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
         setContentView(R.layout.activity_main);
-        filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
-        ScreenOnOffReceiver onoffReceiver = new ScreenOnOffReceiver();
-        registerReceiver(onoffReceiver, filter);
 
+        if (Prefs.getString("kaka", "").equals("1")) {
+            kaka();
+        }
 
     }
 
+    private void kaka() {
+        final Window win = getWindow();
+        win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+        win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        onoffReceiver = new ScreenOnOffReceiver();
+        registerReceiver(onoffReceiver, filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(onoffReceiver);
+    }
 
 
- /*   // used to update the UI
+/*   // used to update the UI
     public class UpdateUiTask extends AsyncTask<Void, Void, String> {
 
         @Override

@@ -11,10 +11,15 @@ public class ScreenOnOffReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
             Log.v("Screen mode", "Screen is in off State");
-            Intent i  = new Intent();
-            i.setClassName("com.app.detectscreenlock", "com.app.detectscreenlock.MainActivity");
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(i);
+
+
+            if (Prefs.getString("kaka","").equals("1")){
+                Intent i  = new Intent();
+                i.setClassName("com.app.detectscreenlock", "com.app.detectscreenlock.MainActivity");
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
+            }
+
 
             /*Intent i = new Intent(context, MainActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP); // You need this if starting
@@ -32,7 +37,7 @@ public class ScreenOnOffReceiver extends BroadcastReceiver {
             //Your logic comes here whatever you want perform when screen is in off state			                  			            }
 
         } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-            Log.v("Screen mode", " Screen is in on State");
+            Log.v("Screen mode", "Screen is in on State");
 
 
             //Your logic comes here whatever you want perform when screen is in on state
